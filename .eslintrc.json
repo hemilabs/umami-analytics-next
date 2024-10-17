@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "bloq/next",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "ignorePatterns": ["_esm/**/*", "_types/**/*", "*.config.js"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    // there are no /pages folder in this repo
+    "next/no-html-link-for-pages": "off"
+  }
+}
