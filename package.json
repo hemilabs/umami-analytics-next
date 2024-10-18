@@ -18,18 +18,19 @@
     "src/**/*.ts",
     "src/**/*.tsx"
   ],
+  "main": "./_esm/index.js",
   "repository": "hemilabs/umami-analytics-next",
   "scripts": {
     "build": "npm run clean && npm run build:esm && npm run build:types",
     "build:esm": "tsc --noEmit false --outDir ./_esm --sourceMap",
-    "build:types": "tsc --module esnext --declarationDir ./_types --emitDeclarationOnly --declaration --declarationMap",
+    "build:types": "tsc --noEmit false --module esnext --declarationDir ./_types --emitDeclarationOnly --declaration --declarationMap",
     "clean": "rm -rf ./_esm ./_types",
     "deps:check": "knip",
     "format:check": "prettier --check .",
     "lint": "eslint --cache .",
     "prepare": "husky",
     "prepublishOnly": "npm run build",
-    "tsc": "tsc"
+    "tsc:check": "tsc"
   },
   "devDependencies": {
     "@commitlint/cli": "19.5.0",

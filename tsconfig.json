@@ -8,7 +8,7 @@
     "jsx": "react-jsx",
     "module": "ES2020",
     "moduleResolution": "node",
-    "noEmit": false,
+    "noEmit": true,
     "noImplicitReturns": true,
     "resolveJsonModule": false,
     "rootDir": "./src",
