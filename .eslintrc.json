@@ -18,9 +18,8 @@
       }
     },
     {
-      "extends": ["plugin:markdownlint/recommended"],
+      "extends": ["bloq/markdown"],
       "files": ["*.md"],
-      "parser": "eslint-plugin-markdownlint/parser",
       "rules": {
         "markdownlint/md013": "off"
       }
