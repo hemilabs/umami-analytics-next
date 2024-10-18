@@ -26,10 +26,10 @@ type Props = Omit<UmamiAnalyticsContextType, "loaded"> & {
 };
 
 export const umamiAnalyticsContextFactory = function <
+  TEventNames extends readonly string[],
   TEventData extends Partial<
     Record<TEventNames[number], { [key: string]: unknown }>
   >,
-  TEventNames extends readonly string[],
 >(eventNames: TEventNames) {
   const UmamiAnalyticsContext = createContext<
     UmamiAnalyticsContextType | undefined
@@ -86,7 +86,7 @@ export const umamiAnalyticsContextFactory = function <
       () =>
         loaded
           ? {
-              track: getTrackFunction<TEventData, TEventNames>(eventNames, {
+              track: getTrackFunction<TEventNames, TEventData>(eventNames, {
                 processUrl,
                 // if autotrack is set to false (undefined defaults to true in umami), internal url is not updated
                 // so we must do it ourselves! (that's why we send pathname)
