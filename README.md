@@ -10,7 +10,41 @@ npm install umami-analytics-next
 
 ## Usage
 
+```tsx
+import { umamiAnalyticsContextFactory } from "umami-analytics-next";
+
+
 The package exposes a `umamiAnalyticsContextFactory` function that accepts a list of events to track (with the possibility of typing the event data), and returns the Providers and hooks for you to use.
+
+const events = ["buy", "cancel", "gift", "sell", "signup", "view"] as const;
+const { UmamiAnalyticsContext, UmamiAnalyticsProvider, useUmami } =
+  umamiAnalyticsContextFactory(eventNames);
+
+// Then, in your _app.tsx or layout component:
+<UmamiAnalyticsProvider
+  autoTrack={false} // defaults to true
+  src="script-url"
+  websiteId="website-id-provided-by-umami"
+>
+  {children}
+</UmamiAnalyticsProvider>;
+
+// and in any component that can consume this context:
+const { track } = useUmami();
+// Tracks a pageView - only needed if autoTrack is set to false
+track();
+// track has type-safe autocompletion for the event names
+track("view");
+track("buy", {
+  amountItems: 3,
+  couponCode: "C2024",
+  success: true,
+});
+```
+
+## Advanced usage
+
+Tracking events may require custom data associated to each event. The library allows to pass a generic TEventData type that allows to type the event data for each event. This way, the `track` function will be type-safe, and will autocomplete the event names and the event data.
 
 ```tsx
 import { umamiAnalyticsContextFactory } from 'umami-analytics-next'
@@ -45,13 +79,13 @@ type EventDataMap = {
         { [key: string]: unknown }
 }
 
-// Generic types are optional, but type-safety will be missing
+// Generic types are optional, but type-safety for event data will be missing if not provided
 const { UmamiAnalyticsContext, UmamiAnalyticsProvider, useUmami } =
-  umamiAnalyticsContextFactory<Events, EventDataMap>(
+  umamiAnalyticsContextFactory<EventDataMap, Events>(
     eventNames,
   )
 
-  // Then, inn your _app.tsx or layout component:
+  // As above, in your _app.tsx or layout component:
   <UmamiAnalyticsProvider
     autoTrack={false} // defaults to true
     processUrl={removeLocaleAndTrailingSlash}
@@ -62,10 +96,7 @@ const { UmamiAnalyticsContext, UmamiAnalyticsProvider, useUmami } =
   </UmamiAnalyticsProvider>
 
   // and in any component that can consume this context:
-
   const { track } = useUmami()
-  // Tracks a pageView - only needed if autoTrack is set to false
-  track()
   // track has type-safe autocompletion in both the event name and the data
   // The event data is optional, but if provided, it must match the type of the event
   track('buy', {
@@ -76,10 +107,6 @@ const { UmamiAnalyticsContext, UmamiAnalyticsProvider, useUmami } =
   track('signup', {
     receiveUpdates: true
   })
-  // Umami allows for custom events or using a callback. Here, the default typing provided by Umami is used
-  track({ customPayload: '123', website: '/form' })
-  // Umami allows to use a function that keeps the original payload, and allows you to update what you want
-  track((params) => ({ ...params, website: '/form' }))
 ```
 
 ## API
