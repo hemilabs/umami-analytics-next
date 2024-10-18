@@ -14,7 +14,12 @@
       "plugins": ["@typescript-eslint"],
       "rules": {
         // there are no /pages folder in this repo
-        "next/no-html-link-for-pages": "off"
+        "next/no-html-link-for-pages": "off",
+        "no-use-before-define": "off",
+        "@typescript-eslint/no-use-before-define": [
+          "error",
+          { "typedefs": false }
+        ]
       }
     },
     {

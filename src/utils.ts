@@ -19,10 +19,10 @@ type TrackingOptions = {
 };
 
 export const getTrackFunction = function <
-  TEventNames extends readonly string[],
   TEventData extends Partial<
     Record<TEventNames[number], { [key: string]: unknown }>
   >,
+  TEventNames extends readonly string[],
 >(eventNames: TEventNames, trackingOptions?: TrackingOptions) {
   // These definitions are based on https://www.npmjs.com/package/@types/umami
   // however, note that these are created with generics so we get intellisense on the events defined
