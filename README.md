@@ -1,6 +1,6 @@
 # umami-analytics-next
 
-A simple type-safe integration between the Umami Analytics API, loaded using [Next's Script](https://nextjs.org/docs/pages/api-reference/components/script) component
+A simple type-safe integration between the Umami Analytics API, loaded using [Next's Script](https://nextjs.org/docs/pages/api-reference/components/script) component.
 
 ## Installation
 
@@ -78,9 +78,8 @@ const { UmamiAnalyticsContext, UmamiAnalyticsProvider, useUmami } =
   })
   // Umami allows for custom events or using a callback. Here, the default typing provided by Umami is used
   track({ customPayload: '123', website: '/form' })
-
-  track((params) => ({ ...params, }))
-
+  // Umami allows to use a function that keeps the original payload, and allows you to update what you want
+  track((params) => ({ ...params, website: '/form' }))
 ```
 
 ## API
