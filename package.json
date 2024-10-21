@@ -1,0 +1,71 @@
+{
+  "name": "umami-analytics-next",
+  "version": "1.0.0",
+  "description": "A simple type-safe integration between the Umami Analytics API, loaded using Next's Script component",
+  "keywords": [
+    "analytics",
+    "next",
+    "react",
+    "typescript",
+    "umami"
+  ],
+  "bugs": "https://github.com/hemilabs/umami-analytics-next/issues",
+  "license": "MIT",
+  "author": "Gonzalo D'Elia <gonzalo@bloq.com>",
+  "files": [
+    "_esm/**/*",
+    "_types/**/*",
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
+  "main": "./_esm/index.js",
+  "repository": "hemilabs/umami-analytics-next",
+  "scripts": {
+    "build": "npm run clean && npm run build:esm && npm run build:types",
+    "build:esm": "tsc --noEmit false --outDir ./_esm --sourceMap",
+    "build:types": "tsc --noEmit false --module esnext --declarationDir ./_types --emitDeclarationOnly --declaration --declarationMap",
+    "clean": "rm -rf ./_esm ./_types",
+    "deps:check": "knip",
+    "format:check": "prettier --check .",
+    "lint": "eslint --cache .",
+    "prepare": "husky",
+    "prepublishOnly": "npm run build",
+    "tsc:check": "tsc"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "19.5.0",
+    "@types/react": "18.2.45",
+    "@types/react-dom": "18.2.18",
+    "@types/umami": "2.10.0",
+    "@typescript-eslint/eslint-plugin": "7.18.0",
+    "@typescript-eslint/parser": "7.18.0",
+    "better-sort-package-json": "1.1.0",
+    "commitlint-config-bloq": "1.0.0",
+    "eslint": "8.57.1",
+    "eslint-config-bloq": "4.2.0",
+    "husky": "9.1.6",
+    "knip": "5.33.3",
+    "lint-staged": "15.2.10",
+    "next": "14.2.3",
+    "prettier": "3.3.3",
+    "typescript": "5.6.3"
+  },
+  "peerDependencies": {
+    "next": ">=13",
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "engines": {
+    "node": ">=16.9.0"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./_esm/index.js",
+      "types": "./_types/index.d.ts"
+    }
+  },
+  "module": "./_esm/index.js",
+  "types": "./_types/index.d.ts",
+  "typings": "./_types/index.d.ts"
+}

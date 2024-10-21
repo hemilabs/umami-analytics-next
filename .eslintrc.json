@@ -1,0 +1,28 @@
+{
+  "extends": ["bloq", "prettier"],
+  "ignorePatterns": ["_esm/**/*", "_types/**/*", "*.config.js"],
+  "overrides": [
+    {
+      "extends": [
+        "bloq/next",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier"
+      ],
+      "files": ["src/**/*.{js,ts,tsx}"],
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint"],
+      "rules": {
+        // there are no /pages folder in this repo
+        "next/no-html-link-for-pages": "off"
+      }
+    },
+    {
+      "extends": ["bloq/markdown"],
+      "files": ["*.md"],
+      "rules": {
+        "markdownlint/md013": "off"
+      }
+    }
+  ]
+}

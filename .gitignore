@@ -1,0 +1,9 @@
+.DS_Store
+.eslintcache
+.vscode/
+
+_esm
+_types
+
+node_modules
+tsconfig.tsbuildinfo
