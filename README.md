@@ -1,5 +1,7 @@
 # umami-analytics-next
 
+![NPM Version](https://img.shields.io/npm/v/umami-analytics-next)![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/hemilabs/umami-analytics-next/js-checks.yml?branch=main)
+
 A simple type-safe integration between the Umami Analytics API, loaded using [Next's Script](https://nextjs.org/docs/pages/api-reference/components/script) component.
 
 ## Installation
