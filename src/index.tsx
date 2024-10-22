@@ -17,8 +17,8 @@ type UmamiAnalyticsContextType = {
   domains?: string[];
   loaded: boolean;
   processUrl?: (url: string) => string;
-  src: string;
-  websiteId: string;
+  src?: string;
+  websiteId?: string;
 };
 
 type Props = Omit<UmamiAnalyticsContextType, "loaded"> & {
@@ -43,12 +43,6 @@ export const umamiAnalyticsContextFactory = function <
     ...options
   }: Props) {
     const [loaded, setLoaded] = useState(false);
-    if (!src) {
-      throw new Error("Script source is required");
-    }
-    if (!websiteId) {
-      throw new Error("websiteId is required");
-    }
 
     return (
       <>
@@ -57,18 +51,20 @@ export const umamiAnalyticsContextFactory = function <
         >
           {children}
         </UmamiAnalyticsContext.Provider>
-        <Script
-          async
-          data-auto-track={autoTrack.toString()}
-          data-website-id={websiteId}
-          src={src}
-          {...(options.domains !== undefined &&
-            Array.isArray(options.domains) &&
-            options.domains.length > 0 && {
-              "data-domains": options.domains.join(","),
-            })}
-          onLoad={() => setLoaded(true)}
-        />
+        {!!src && !!websiteId && (
+          <Script
+            async
+            data-auto-track={autoTrack.toString()}
+            data-website-id={websiteId}
+            src={src}
+            {...(options.domains !== undefined &&
+              Array.isArray(options.domains) &&
+              options.domains.length > 0 && {
+                "data-domains": options.domains.join(","),
+              })}
+            onLoad={() => setLoaded(true)}
+          />
+        )}
       </>
     );
   };

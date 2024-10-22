@@ -1,6 +1,6 @@
 {
   "name": "umami-analytics-next",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple type-safe integration between the Umami Analytics API, loaded using Next's Script component",
   "keywords": [
     "analytics",
